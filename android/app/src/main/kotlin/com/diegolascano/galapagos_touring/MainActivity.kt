@@ -1,4 +1,4 @@
-package com.diegolascano.GalapagosReborn
+package com.diegolascano.galapagos_touring
 
 import io.flutter.embedding.android.FlutterActivity
 
