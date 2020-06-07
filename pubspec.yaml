@@ -30,6 +30,7 @@ dependencies:
   google_sign_in: ^4.5.0
   cloud_firestore: ^0.13.5
   flutter_svg: ^0.17.4
+  flutter_swiper: ^1.1.6
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -55,6 +56,8 @@ flutter:
     - assets/logos/facebook-logo.png
     - assets/logos/google-logo.png
     - assets/svg/through_the_park.svg
+    - assets/images/jar-loading.gif
+    - assets/images/no-image.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
