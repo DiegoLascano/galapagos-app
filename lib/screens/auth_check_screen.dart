@@ -3,7 +3,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:galapagos_touring/screens/auth/auth_screen.dart';
-import 'package:galapagos_touring/screens/islands/islands_screen.dart';
 import 'package:galapagos_touring/screens/navigation/home_screen.dart';
 import 'package:galapagos_touring/services/auth/auth_interface.dart';
 import 'package:galapagos_touring/services/auth/user.dart';
@@ -27,7 +26,7 @@ class AuthCheckScreen extends StatelessWidget {
           } else {
             return Provider<Database>(
               create: (_) => FirestoreDatabase(uid: user.uid),
-              child: IslandsScreen(),
+              child: HomeScreen(),
             );
           }
         } else {
