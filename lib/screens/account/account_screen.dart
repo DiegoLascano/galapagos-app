@@ -3,7 +3,7 @@ import 'package:galapagos_touring/services/auth/auth_interface.dart';
 import 'package:galapagos_touring/widgets/common/platform_alert_dialog.dart';
 import 'package:provider/provider.dart';
 
-class HomeScreen extends StatelessWidget {
+class AccountScreen extends StatelessWidget {
   Future<void> _signOut(BuildContext context) async {
     try {
       final auth = Provider.of<AuthInterface>(context, listen: false);
