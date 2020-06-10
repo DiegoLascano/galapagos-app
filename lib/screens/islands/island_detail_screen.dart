@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:galapagos_touring/models/island_model.dart';
 
@@ -12,7 +14,9 @@ class IslandDetailScreen extends StatelessWidget {
         slivers: <Widget>[
           _createAppbar(context, island),
           SliverList(
-            delegate: SliverChildListDelegate([_createDescription(island)]),
+            delegate: SliverChildListDelegate([
+              _createDescription(island),
+            ]),
           )
         ],
       ),
@@ -28,19 +32,50 @@ class IslandDetailScreen extends StatelessWidget {
       pinned: true,
       flexibleSpace: FlexibleSpaceBar(
         centerTitle: true,
-        title: Text('Isla ${island.name}',
-            style: TextStyle(color: Colors.white, fontSize: 16.0)),
-        background: FadeInImage(
-          placeholder: AssetImage('assets/images/jar-loading.gif'),
-          image: NetworkImage(island.imageUrl),
-          fadeInDuration: Duration(milliseconds: 200),
-          fit: BoxFit.cover,
+        title: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10.0),
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                  child: Container(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),
+                    child: Text('Isla ${island.name}',
+                        style: TextStyle(color: Colors.white, fontSize: 16.0)),
+                  ),
+                ),
+              ),
+              Row(
+                children: <Widget>[
+                  Icon(Icons.star, color: Colors.amber, size: 14.0),
+                  Icon(Icons.star, color: Colors.amber, size: 14.0),
+                  Icon(Icons.star, color: Colors.amber, size: 14.0),
+                  Icon(Icons.star, color: Colors.amber, size: 14.0),
+                  Icon(Icons.star_half, color: Colors.amber, size: 14.0),
+                ],
+              )
+            ],
+          ),
+        ),
+        background: Hero(
+          tag: island.id,
+          child: FadeInImage(
+            placeholder: AssetImage('assets/images/jar-loading.gif'),
+            image: NetworkImage(island.imageUrl),
+            fadeInDuration: Duration(milliseconds: 200),
+            fit: BoxFit.cover,
+          ),
         ),
       ),
     );
   }
 
   Widget _createDescription(Island island) {
+    print(island.name);
     return Container(
       padding: EdgeInsets.all(20.0),
       child: Text(

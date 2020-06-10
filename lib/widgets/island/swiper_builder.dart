@@ -5,14 +5,16 @@ import 'package:galapagos_touring/widgets/island/empty_content.dart';
 typedef ItemWidgetBuilder<T> = Widget Function(BuildContext context, T item);
 
 class SwiperBuilder<T> extends StatelessWidget {
-  const SwiperBuilder({
-    Key key,
-    @required this.snapshot,
-    @required this.itemBuilder,
-  }) : super(key: key);
+  const SwiperBuilder(
+      {Key key,
+      @required this.snapshot,
+      @required this.itemBuilder,
+      @required this.pageController})
+      : super(key: key);
 
   final AsyncSnapshot<List<T>> snapshot;
   final ItemWidgetBuilder<T> itemBuilder;
+  final PageController pageController;
 
   @override
   Widget build(BuildContext context) {
@@ -36,15 +38,23 @@ class SwiperBuilder<T> extends StatelessWidget {
   }
 
   Widget _buildList(Size size, List<T> items) {
-    return Swiper(
-      layout: SwiperLayout.STACK,
-      itemHeight: double.infinity,
-      itemWidth: double.infinity,
+    return PageView.builder(
+      pageSnapping: true,
+      controller: pageController,
       itemCount: items.length,
       itemBuilder: (context, index) {
         return itemBuilder(context, items[index]);
       },
     );
+    // return Swiper(
+    //   layout: SwiperLayout.STACK,
+    //   itemHeight: double.infinity,
+    //   itemWidth: double.infinity,
+    //   itemCount: items.length,
+    //   itemBuilder: (context, index) {
+    //     return itemBuilder(context, items[index]);
+    //   },
+    // );
     // return ListView.separated(
     //   itemCount: items.length + 2,
     //   separatorBuilder: (_, __) => Divider(height: 1.5),
