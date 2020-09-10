@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:galapagos_touring/text_styles.dart';
 import 'dart:ui';
 import 'package:provider/provider.dart';
 
@@ -26,12 +27,13 @@ class IslandsScreen extends StatelessWidget {
 
   Widget _buildHeader() {
     return Align(
-      alignment: Alignment.centerLeft,
+      alignment: Alignment.center,
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
         child: Text(
-          'Islas Encantadas',
-          style: TextStyle(fontSize: 20.0),
+          'Descubre las islas encantadas',
+          style:
+              CustomTextStyles.titleStyle(color: Colors.grey[900], size: 30.0),
         ),
       ),
     );
@@ -44,7 +46,8 @@ class IslandsScreen extends StatelessWidget {
       builder: (BuildContext context, AsyncSnapshot<List<Island>> snapshot) {
         return SwiperBuilder<Island>(
           snapshot: snapshot,
-          pageController: PageController(initialPage: 1, viewportFraction: 0.8),
+          pageController: PageController(initialPage: 0, viewportFraction: 0.8),
+          pageSnapping: true,
           itemBuilder: (context, island) => GestureDetector(
             child: Container(
               padding: EdgeInsets.fromLTRB(15.0, 30.0, 15.0, 50.0),
@@ -71,12 +74,25 @@ class IslandsScreen extends StatelessWidget {
     return Positioned.fill(
       child: Hero(
         tag: island.id,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(30.0),
-          child: FadeInImage(
-            placeholder: AssetImage('assets/images/jar-loading.gif'),
-            image: NetworkImage(island.imageUrl),
-            fit: BoxFit.fitHeight,
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(30.0),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.blueGrey[400].withOpacity(0.2),
+                spreadRadius: 5,
+                blurRadius: 7,
+                offset: Offset(5, 5),
+              )
+            ],
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(30.0),
+            child: FadeInImage(
+              placeholder: AssetImage('assets/images/jar-loading.gif'),
+              image: NetworkImage(island.imageUrl),
+              fit: BoxFit.fitHeight,
+            ),
           ),
         ),
       ),
@@ -95,38 +111,53 @@ class IslandsScreen extends StatelessWidget {
           // color: Color.fromRGBO(0, 0, 0, 0.18),
           borderRadius: BorderRadius.circular(20.0),
         ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(20.0),
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-            child: Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    'Isla ${island.name}',
-                    style: TextStyle(
-                      letterSpacing: 0.5,
-                      fontSize: 25.0,
-                      color: Color.fromRGBO(255, 255, 255, 0.8),
-                      fontWeight: FontWeight.bold,
+        child: Container(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                'Isla ${island.name}',
+                style: TextStyle(
+                  letterSpacing: 0.5,
+                  fontSize: 28.0,
+                  color: Color.fromRGBO(255, 255, 255, 0.8),
+                  fontWeight: FontWeight.bold,
+                  shadows: [
+                    Shadow(
+                      blurRadius: 5.0,
+                      color: Colors.black,
+                      offset: Offset(2.0, 2.0),
                     ),
-                  ),
-                  SizedBox(height: 10.0),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Icon(Icons.star, color: Colors.amber, size: 18.0),
-                      Icon(Icons.star, color: Colors.amber, size: 18.0),
-                      Icon(Icons.star, color: Colors.amber, size: 18.0),
-                      Icon(Icons.star, color: Colors.amber, size: 18.0),
-                      Icon(Icons.star_half, color: Colors.amber, size: 18.0),
-                    ],
-                  )
-                ],
+                  ],
+                ),
               ),
-            ),
+              SizedBox(height: 10.0),
+              Text(
+                'Galápagos',
+                style: TextStyle(
+                  fontSize: 23.0,
+                  color: Color.fromRGBO(255, 255, 255, 0.8),
+                  shadows: [
+                    Shadow(
+                      blurRadius: 5.0,
+                      color: Colors.black,
+                      offset: Offset(2.0, 2.0),
+                    ),
+                  ],
+                ),
+              ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: <Widget>[
+              //     Icon(Icons.star, color: Colors.amber, size: 18.0),
+              //     Icon(Icons.star, color: Colors.amber, size: 18.0),
+              //     Icon(Icons.star, color: Colors.amber, size: 18.0),
+              //     Icon(Icons.star, color: Colors.amber, size: 18.0),
+              //     Icon(Icons.star_half, color: Colors.amber, size: 18.0),
+              //   ],
+              // )
+            ],
           ),
         ),
       ),

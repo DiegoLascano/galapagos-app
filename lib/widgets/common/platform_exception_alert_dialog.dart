@@ -21,7 +21,7 @@ class PlatformExceptionAlertDialog extends PlatformAlertDialog {
     return _errors[exception.code] ?? exception.message;
   }
 
-  static Map<String, String> _errors = {
+  static final Map<String, String> _errors = {
     'ERROR_WEAK_PASSWORD': 'Tu contraseña es muy débil.',
     'ERROR_INVALID_EMAIL': 'El correo ingresado es erroneo',
     'ERROR_EMAIL_ALREADY_IN_USE': 'El correo ingresado ya existe.',

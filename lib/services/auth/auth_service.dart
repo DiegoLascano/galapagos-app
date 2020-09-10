@@ -43,8 +43,8 @@ class Auth implements AuthInterface {
     return _userFromFirebase(authResponse.user);
   }
 
-  // TODO: not running on iphone. Go to video 168 of the course.
-  // a configuration value form google-services is needed
+  // TODO: not running on iphone. Go to video 168 of the Andrea's course.
+  // a configuration value from google-services is needed
   @override
   Future<User> signInWithGoogle() async {
     final googleSignIn = GoogleSignIn();

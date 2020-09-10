@@ -20,7 +20,7 @@ class AuthCheckScreen extends StatelessWidget {
       stream: auth.onAuthStateChanged,
       builder: (BuildContext context, AsyncSnapshot<User> snapshot) {
         if (snapshot.connectionState == ConnectionState.active) {
-          User user = snapshot.data;
+          final user = snapshot.data;
           if (user == null) {
             return AuthScreen.create(context);
           } else {

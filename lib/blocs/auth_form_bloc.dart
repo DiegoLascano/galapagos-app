@@ -65,7 +65,7 @@ class AuthFormBloc with Validators {
   Future<User> createUserWithEmailAndPassword() async => await _authenticate(
       () => auth.createUserWithEmailAndPassword(email, password));
 
-  dispose() {
+  void dispose() {
     _nameController?.close();
     _lastNameController?.close();
     _emailController?.close();

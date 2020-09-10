@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:galapagos_touring/services/auth/auth_interface.dart';
 import 'package:galapagos_touring/widgets/common/platform_alert_dialog.dart';
 import 'package:provider/provider.dart';
+import 'package:pedantic/pedantic.dart';
 
 class AccountScreen extends StatelessWidget {
   Future<void> _signOut(BuildContext context) async {
@@ -20,7 +21,7 @@ class AccountScreen extends StatelessWidget {
       defaultActionText: 'Cerrar Sesión',
       cancelActionText: 'Cancelar',
     ).show(context);
-    if (_signOutComfirmed) _signOut(context);
+    if (_signOutComfirmed) unawaited(_signOut(context));
   }
 
   @override

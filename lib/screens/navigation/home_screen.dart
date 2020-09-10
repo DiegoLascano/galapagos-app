@@ -1,4 +1,6 @@
+import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
+import 'package:galapagos_touring/admob/ad_manager.dart';
 import 'package:galapagos_touring/screens/account/account_screen.dart';
 import 'package:galapagos_touring/screens/islands/islands_screen.dart';
 import 'package:galapagos_touring/screens/navigation/cupertino_home_scaffold.dart';
@@ -10,6 +12,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  // TODO: refactor to move admob related code to an more appropiate place
+  @override
+  void initState() {
+    super.initState();
+    FirebaseAdMob.instance.initialize(appId: AdManager.appId);
+  }
+
   TabItem _currentTab = TabItem.islands;
 
   final Map<TabItem, GlobalKey<NavigatorState>> navigatorKeys = {

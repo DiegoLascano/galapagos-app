@@ -8,6 +8,7 @@ import 'package:galapagos_touring/screens/auth/signin_screen.dart';
 import 'package:galapagos_touring/services/auth/auth_interface.dart';
 import 'package:galapagos_touring/widgets/common/platform_exception_alert_dialog.dart';
 import 'package:galapagos_touring/widgets/signin/signin_button.dart';
+import 'package:pedantic/pedantic.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({Key key, @required this.bloc}) : super(key: key);
@@ -30,10 +31,10 @@ class SignUpScreen extends StatelessWidget {
       await bloc.createUserWithEmailAndPassword();
       Navigator.of(context).pop();
     } on PlatformException catch (e) {
-      PlatformExceptionAlertDialog(
+      unawaited(PlatformExceptionAlertDialog(
         title: 'Error al crear cuenta',
         exception: e,
-      ).show(context);
+      ).show(context));
     }
   }
 

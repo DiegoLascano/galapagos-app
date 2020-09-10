@@ -1,26 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:galapagos_touring/widgets/island/empty_content.dart';
 
 typedef ItemWidgetBuilder<T> = Widget Function(BuildContext context, T item);
 
 class SwiperBuilder<T> extends StatelessWidget {
-  const SwiperBuilder(
-      {Key key,
-      @required this.snapshot,
-      @required this.itemBuilder,
-      @required this.pageController})
-      : super(key: key);
+  const SwiperBuilder({
+    Key key,
+    @required this.snapshot,
+    @required this.itemBuilder,
+    @required this.pageController,
+    @required this.pageSnapping,
+  }) : super(key: key);
 
   final AsyncSnapshot<List<T>> snapshot;
   final ItemWidgetBuilder<T> itemBuilder;
   final PageController pageController;
+  final bool pageSnapping;
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     if (snapshot.hasData) {
-      final List<T> items = snapshot.data;
+      final items = snapshot.data;
       if (items.isNotEmpty) {
         return _buildList(size, items);
       } else {
@@ -39,7 +40,7 @@ class SwiperBuilder<T> extends StatelessWidget {
 
   Widget _buildList(Size size, List<T> items) {
     return PageView.builder(
-      pageSnapping: true,
+      pageSnapping: pageSnapping,
       controller: pageController,
       itemCount: items.length,
       itemBuilder: (context, index) {

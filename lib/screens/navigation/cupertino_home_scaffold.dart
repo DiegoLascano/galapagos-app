@@ -21,7 +21,9 @@ class CupertinoHomeScaffold extends StatelessWidget {
     return CupertinoTabScaffold(
       backgroundColor: Colors.white, //this changes the top statusbar bg color
       tabBar: CupertinoTabBar(
-        border: Border(top: BorderSide(color: Colors.transparent)),
+        border: Border(
+          top: BorderSide(color: Colors.transparent),
+        ),
         backgroundColor: Colors.transparent,
         items: [
           _buildItem(context, TabItem.islands),
@@ -42,7 +44,9 @@ class CupertinoHomeScaffold extends StatelessWidget {
 
   BottomNavigationBarItem _buildItem(BuildContext context, TabItem tabItem) {
     final itemData = TabItemData.allData[tabItem];
-    final color = currentTab == tabItem ? Colors.black87 : Colors.grey;
+    final color = currentTab == tabItem
+        ? Theme.of(context).primaryColorDark
+        : Colors.grey;
     return BottomNavigationBarItem(
       icon: Icon(
         itemData.icon,

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+// import 'package:flutter_svg/flutter_svg.dart';
+import 'package:galapagos_touring/text_styles.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import 'package:galapagos_touring/screens/auth/signin_screen.dart';
@@ -76,53 +78,70 @@ class AuthScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        child: SafeArea(
-          child: StreamBuilder(
-            stream: bloc.isLoadingStream,
-            initialData: false,
-            builder: (context, snapshot) {
-              final isLoading = snapshot.data;
-              // if (isLoading) {
-              //   return Center(
-              //     child: CircularProgressIndicator(),
-              //   );
-              // } else {
-              return Stack(
-                children: <Widget>[
-                  Column(
+        child: StreamBuilder(
+          stream: bloc.isLoadingStream,
+          initialData: false,
+          builder: (context, snapshot) {
+            final isLoading = snapshot.data;
+            // if (isLoading) {
+            //   return Center(
+            //     child: CircularProgressIndicator(),
+            //   );
+            // } else {
+            return Stack(
+              children: <Widget>[
+                Container(
+                  height: double.infinity,
+                  child: Image(
+                    fit: BoxFit.cover,
+                    image: AssetImage('assets/images/tortuga.jpg'),
+                  ),
+                ),
+                SafeArea(
+                  child: Column(
                     children: <Widget>[
                       // TODO: implement in the next version release instead of SifezBox
                       // _createLoginButton(context),
                       SizedBox(height: 20.0),
-                      Text('This is the title'),
-                      SizedBox(height: 20.0),
-                      Expanded(
-                        child: _createCardSwiper(),
+                      Container(
+                        margin: EdgeInsets.only(top: 10.0),
+                        child: Text(
+                          'Bienvenido a Galápagos',
+                          style: CustomTextStyles.titleStyle(
+                            color: Colors.white,
+                            size: 40.0,
+                          ),
+                        ),
                       ),
                       SizedBox(height: 20.0),
+                      Expanded(
+                        child: Container(),
+//                        child: _createCardSwiper(),
+                      ),
+//                      SizedBox(height: 20.0),
                       _createRegisterButtons(context, isLoading),
                       SizedBox(height: 80.0),
                     ],
                   ),
-                  (isLoading)
-                      ? Stack(
-                          children: <Widget>[
-                            Opacity(
-                              opacity: 0.3,
-                              child: const ModalBarrier(
-                                dismissible: false,
-                                color: Colors.grey,
-                              ),
+                ),
+                (isLoading)
+                    ? Stack(
+                        children: <Widget>[
+                          Opacity(
+                            opacity: 0.3,
+                            child: const ModalBarrier(
+                              dismissible: false,
+                              color: Colors.grey,
                             ),
-                            Center(child: CircularProgressIndicator()),
-                          ],
-                        )
-                      : Container(),
-                ],
-              );
-              // }
-            },
-          ),
+                          ),
+                          Center(child: CircularProgressIndicator()),
+                        ],
+                      )
+                    : Container(),
+              ],
+            );
+            // }
+          },
         ),
       ),
     );
@@ -144,16 +163,16 @@ class AuthScreen extends StatelessWidget {
   //   );
   // }
 
-  Widget _createCardSwiper() {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20.0),
-      child: SvgPicture.asset(
-        'assets/svg/through_the_park.svg',
-        // color: Colors.purpleAccent,
-        // colorBlendMode: BlendMode.darken,
-      ),
-    );
-  }
+  // Widget _createCardSwiper() {
+  //   return Container(
+  //     padding: EdgeInsets.symmetric(horizontal: 20.0),
+  //     child: SvgPicture.asset(
+  //       'assets/svg/through_the_park.svg',
+  //       // color: Colors.purpleAccent,
+  //       // colorBlendMode: BlendMode.darken,
+  //     ),
+  //   );
+  // }
 
   Widget _createRegisterButtons(BuildContext context, bool isLoading) {
     return Column(
@@ -201,10 +220,12 @@ class AuthScreen extends StatelessWidget {
           margin: EdgeInsets.symmetric(horizontal: 40.0),
           width: double.infinity,
           child: SignInButton(
-            text: 'Comencemos',
+            text: 'Explorar las Islas Encantadas',
             textColor: Colors.white,
-            color: Theme.of(context).primaryColor,
-            disabledColor: Theme.of(context).primaryColorLight,
+            color: Colors.white12,
+//            borderColor: Colors.white,
+//            color: Theme.of(context).primaryColor,
+//            disabledColor: Theme.of(context).primaryColorLight,
             onPressed: isLoading ? null : () => _signInAnonymously(context),
           ),
         ),

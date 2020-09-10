@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:pedantic/pedantic.dart';
 
 import 'package:galapagos_touring/screens/auth_check_screen.dart';
 import 'package:galapagos_touring/blocs/auth_form_bloc.dart';
@@ -30,10 +31,10 @@ class SignInScreen extends StatelessWidget {
       await bloc.signInWithEmailAndPassword();
       Navigator.of(context).pop();
     } on PlatformException catch (e) {
-      PlatformExceptionAlertDialog(
+      unawaited(PlatformExceptionAlertDialog(
         title: 'Error al iniciar sesión',
         exception: e,
-      ).show(context);
+      ).show(context));
     }
   }
 
